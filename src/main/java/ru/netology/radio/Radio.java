@@ -1,7 +1,7 @@
 package ru.netology.radio;
 
 public class Radio {
-    private int currentVolume;
+//    private int currentVolume;
     private int currentStation;
 
     public int getCurrentStation() {
