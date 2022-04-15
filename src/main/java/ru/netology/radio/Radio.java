@@ -3,6 +3,7 @@ package ru.netology.radio;
 public class Radio {
 
     private int currentStation;
+    private int currentVolume;
 
     public int getCurrentStation() {
 
@@ -30,6 +31,35 @@ public class Radio {
         this.currentStation = currentStation - 1;
         if (currentStation == -1) {
             this.currentStation = 9;
+        }
+    }
+
+    public int getCurrentVolume() {
+
+        return currentVolume;
+    }
+
+    public void setCurrentVolume(int currentVolume) {
+        if (currentVolume < 0) {
+            return;
+        }
+        if (currentVolume > 10) {
+            return;
+        }
+        this.currentVolume = currentVolume;
+    }
+
+    public void increaseVolume() {         // увеличение звука
+        this.currentVolume = currentVolume + 1;
+        if (currentVolume == 11) {
+            this.currentVolume = 10;
+        }
+    }
+
+    public void soundReduction() {         // убавление звука
+        this.currentVolume = currentVolume - 1;
+        if (currentVolume == -1) {
+            this.currentVolume = 0;
         }
     }
 
