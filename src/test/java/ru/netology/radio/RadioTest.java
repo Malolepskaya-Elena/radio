@@ -81,6 +81,48 @@ public class RadioTest {
     }
 
     @Test
+    public void nextMiddleStation() {   // выставление следующей станции в середине
+        Radio cond = new Radio();
+
+        cond.setCurrentStation(5);
+        cond.next();
+
+        int expected = 6;
+        int actual = cond.getCurrentStation();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void nextMinStation() {   // выставление минимальной граничной станции
+        Radio cond = new Radio();
+
+        cond.setCurrentStation(0);
+        cond.next();
+
+        int expected = 1;
+        int actual = cond.getCurrentStation();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void nextNegativStation() {   // выставление отрицательной станции
+        Radio cond = new Radio();
+
+        cond.setCurrentStation(-1);
+        cond.next();
+
+        int expected = 1;
+        int actual = cond.getCurrentStation();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
     public void prevStation() {   // выставление предыдущей станции
         Radio cond = new Radio();
 
@@ -88,6 +130,62 @@ public class RadioTest {
         cond.prev();
 
         int expected = 9;
+        int actual = cond.getCurrentStation();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void prevMaxStation() {   // выставление максимальной предыдущей границы
+        Radio cond = new Radio();
+
+        cond.setCurrentStation(9);
+        cond.prev();
+
+        int expected = 8;
+        int actual = cond.getCurrentStation();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void prevMaxNegativStation() {   // выставление максимальной негативной предыдущей границы
+        Radio cond = new Radio();
+
+        cond.setCurrentStation(11);
+        cond.prev();
+
+        int expected = 9;
+        int actual = cond.getCurrentStation();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void prevMinNegativStation() {   // выставление отрицательной предыдущей границы
+        Radio cond = new Radio();
+
+        cond.setCurrentStation(-1);
+        cond.prev();
+
+        int expected = 9;
+        int actual = cond.getCurrentStation();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void prevMiddleStation() {   // выставление станции путем уменьшения
+        Radio cond = new Radio();
+
+        cond.setCurrentStation(5);
+        cond.prev();
+
+        int expected = 4;
         int actual = cond.getCurrentStation();
 
         assertEquals(expected, actual);
