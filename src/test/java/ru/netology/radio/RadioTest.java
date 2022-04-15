@@ -207,10 +207,52 @@ public class RadioTest {
     }
 
     @Test
-    public void minVolume() {   // уменьшение звука ниже минимального
+    public void middleVolume() {   // Увеличение звука
+        Radio cond = new Radio();
+
+        cond.setCurrentVolume(5);
+        cond.increaseVolume();
+
+        int expected = 6;
+        int actual = cond.getCurrentVolume();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void minVolume() {   // Увеличение звука нижней границы
         Radio cond = new Radio();
 
         cond.setCurrentVolume(0);
+        cond.increaseVolume();
+
+        int expected = 1;
+        int actual = cond.getCurrentVolume();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void minNegativVolume() {   // уменьшение звука ниже минимального
+        Radio cond = new Radio();
+
+        cond.setCurrentVolume(0);
+        cond.soundReduction();
+
+        int expected = 0;
+        int actual = cond.getCurrentVolume();
+
+        assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void NegtivVolume() {   // уменьшение отрицательного звука
+        Radio cond = new Radio();
+
+        cond.setCurrentVolume(-1);
         cond.soundReduction();
 
         int expected = 0;
