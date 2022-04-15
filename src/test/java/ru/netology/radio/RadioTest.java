@@ -66,4 +66,18 @@ public class RadioTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void nextStation() {
+        Radio cond = new Radio();
+
+        cond.setCurrentStation(9);
+        cond.next();
+
+        int expected = 0;
+        int actual = cond.getCurrentStation();
+
+        assertEquals(expected, actual);
+
+    }
+
 }
