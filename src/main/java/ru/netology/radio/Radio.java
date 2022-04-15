@@ -26,4 +26,12 @@ public class Radio {
         }
     }
 
+    public void prev() {         // предыдущая станция
+        this.currentStation = currentStation - 1;
+        if (currentStation == -1) {
+            this.currentStation = 9;
+        }
+    }
+
+
 }
