@@ -7,303 +7,194 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RadioTest {
 
     @Test
-    public void test() {            // выставление максмальной станции
+    public void testMaxStation() {   // выставление максмальной станции (где по умолчанию 10 станций)
         Radio cond = new Radio();
 
+        int expectedStation = 9;
         cond.setCurrentStation(9);
+        assertEquals(expectedStation, cond.getCurrentStation());
 
-        int expected = 9;
-        int actual = cond.getCurrentStation();
-
-        assertEquals(expected, actual);
     }
 
     @Test
-    public void testNoStation() {     // выставление станции за границей существующих станций
+    public void testNoStation() {  // выставление станции за границей существующих станций (по умолчанию)
         Radio cond = new Radio();
 
+        int expectedStation = 0;
         cond.setCurrentStation(10);
+        assertEquals(expectedStation, cond.getCurrentStation());
 
-        int expected = 0;
-        int actual = cond.getCurrentStation();
-
-        assertEquals(expected, actual);
     }
 
     @Test
-    public void testMiddleStation() {  // выставление станции внутри разрешенного диапазона
+    public void testMiddleStation() {  // выставление станции внутри разрешенного диапазона (по умолчанию)
         Radio cond = new Radio();
 
+        int expectedStation = 5;
         cond.setCurrentStation(5);
+        assertEquals(expectedStation, cond.getCurrentStation());
 
-        int expected = 5;
-        int actual = cond.getCurrentStation();
-
-        assertEquals(expected, actual);
     }
 
     @Test
-    public void testMinStation() {  // выставление минимального граничного значения
+    public void testMinStation() {  // выставление минимального граничного значения (по умолчанию)
         Radio cond = new Radio();
+
+        int expectedStation = 0;
+        cond.setCurrentStation(0);
+        assertEquals(expectedStation, cond.getCurrentStation());
+
+    }
+
+    @Test
+    public void testMiniStation() {  // выставление отрицательного значения (по умолчанию)
+        Radio cond = new Radio();
+
+        int expectedStation = 0;
+        cond.setCurrentStation(-1);
+        assertEquals(expectedStation, cond.getCurrentStation());
+
+    }
+
+    @Test
+    public void testMaxModStation() {   // выставление максимальной станции (модифицированное радио)
+        int allStation = 25; // колличество станций
+        Radio cond = new Radio(allStation);
+
+        int expectedStation = 24;
+        cond.setCurrentStation(24);
+
+        assertEquals(expectedStation, cond.getCurrentStation());
+
+    }
+
+    @Test
+    public void testMiddleModStation() {   // выставление станции в середине  (модифицированное радио)
+        int allStation = 25; // колличество станций
+        Radio cond = new Radio(allStation);
+
+        int expectedStation = 15;
+        cond.setCurrentStation(15);
+
+        assertEquals(expectedStation, cond.getCurrentStation());
+
+    }
+
+
+    @Test
+    public void nextModStation() {   // выставление следующей станции (модиф.радио)
+
+        int allStation = 25; // колличество станций
+        Radio cond = new Radio(allStation);
+
+        int expectedStation = 17;
+
+        cond.setCurrentStation(16);
+        cond.next();
+
+        assertEquals(expectedStation, cond.getCurrentStation());
+
+    }
+
+    @Test
+    public void nextMaxModStation() {   // выставление >max станции (модиф.радио)
+
+        int allStation = 25; // колличество станций
+        Radio cond = new Radio(allStation);
+
+        int expectedStation = 0;
+
+        cond.setCurrentStation(24);
+        cond.next();
+
+        assertEquals(expectedStation, cond.getCurrentStation());
+
+    }
+
+    @Test
+    public void prevMiddleModStation() {   // выставление предыдущей станции (модиф.радио)
+
+        int allStation = 25; // колличество станций
+        Radio cond = new Radio(allStation);
+
+        int expectedStation = 14;
+
+        cond.setCurrentStation(15);
+        cond.prev();
+
+        assertEquals(expectedStation, cond.getCurrentStation());
+
+    }
+
+    @Test
+    public void зкумMinModStation() {   // выставление <min предыдущей станции (модиф.радио)
+
+        int allStation = 25; // колличество станций
+        Radio cond = new Radio(allStation);
+
+        int expectedStation = 24;
 
         cond.setCurrentStation(0);
-
-        int expected = 0;
-        int actual = cond.getCurrentStation();
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testNegativStation() {   // выставление станции за минимальной границей
-        Radio cond = new Radio();
-
-        cond.setCurrentStation(-1);
-
-        int expected = 0;
-        int actual = cond.getCurrentStation();
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void nextStation() {   // выставление следующей станции
-        Radio cond = new Radio();
-
-        cond.setCurrentStation(9);
-        cond.next();
-
-        int expected = 0;
-        int actual = cond.getCurrentStation();
-
-        assertEquals(expected, actual);
-
-    }
-
-    @Test
-    public void nextMiddleStation() {   // выставление следующей станции в середине
-        Radio cond = new Radio();
-
-        cond.setCurrentStation(5);
-        cond.next();
-
-        int expected = 6;
-        int actual = cond.getCurrentStation();
-
-        assertEquals(expected, actual);
-
-    }
-
-    @Test
-    public void nextMinStation() {   // выставление минимальной граничной станции
-        Radio cond = new Radio();
-
-        cond.setCurrentStation(0);
-        cond.next();
-
-        int expected = 1;
-        int actual = cond.getCurrentStation();
-
-        assertEquals(expected, actual);
-
-    }
-
-    @Test
-    public void nextNegativStation() {   // выставление отрицательной станции
-        Radio cond = new Radio();
-
-        cond.setCurrentStation(-1);
-        cond.next();
-
-        int expected = 1;
-        int actual = cond.getCurrentStation();
-
-        assertEquals(expected, actual);
-
-    }
-
-    @Test
-    public void prevStation() {   // выставление предыдущей станции
-        Radio cond = new Radio();
-
-        cond.setCurrentStation(0);
         cond.prev();
 
-        int expected = 9;
-        int actual = cond.getCurrentStation();
-
-        assertEquals(expected, actual);
+        assertEquals(expectedStation, cond.getCurrentStation());
 
     }
 
-    @Test
-    public void prevMaxStation() {   // выставление максимальной предыдущей границы
-        Radio cond = new Radio();
-
-        cond.setCurrentStation(9);
-        cond.prev();
-
-        int expected = 8;
-        int actual = cond.getCurrentStation();
-
-        assertEquals(expected, actual);
-
-    }
 
     @Test
-    public void prevMaxNegativStation() {   // выставление максимальной негативной предыдущей границы
+    public void nextMaxVolume() {   // выставление звука >max
+
         Radio cond = new Radio();
 
-        cond.setCurrentStation(11);
-        cond.prev();
+        int expectedVolume = 100;
 
-        int expected = 9;
-        int actual = cond.getCurrentStation();
-
-        assertEquals(expected, actual);
-
-    }
-
-    @Test
-    public void prevMinNegativStation() {   // выставление отрицательной предыдущей границы
-        Radio cond = new Radio();
-
-        cond.setCurrentStation(-1);
-        cond.prev();
-
-        int expected = 9;
-        int actual = cond.getCurrentStation();
-
-        assertEquals(expected, actual);
-
-    }
-
-    @Test
-    public void prevMiddleStation() {   // выставление станции путем уменьшения
-        Radio cond = new Radio();
-
-        cond.setCurrentStation(5);
-        cond.prev();
-
-        int expected = 4;
-        int actual = cond.getCurrentStation();
-
-        assertEquals(expected, actual);
-
-    }
-
-    @Test
-    public void maxVolume() {   // Увеличение звука выше максимального
-        Radio cond = new Radio();
-
-        cond.setCurrentVolume(10);
+        cond.setCurrentVolume(100);
         cond.increaseVolume();
 
-        int expected = 10;
-        int actual = cond.getCurrentVolume();
-
-        assertEquals(expected, actual);
+        assertEquals(expectedVolume, cond.getCurrentVolume());
 
     }
 
     @Test
-    public void middleVolume() {   // Увеличение звука
+    public void nextMiddleVolume() {   // увеличение звука
+
         Radio cond = new Radio();
 
-        cond.setCurrentVolume(5);
+        int expectedVolume = 51;
+
+        cond.setCurrentVolume(50);
         cond.increaseVolume();
 
-        int expected = 6;
-        int actual = cond.getCurrentVolume();
-
-        assertEquals(expected, actual);
+        assertEquals(expectedVolume, cond.getCurrentVolume());
 
     }
 
-    @Test
-    public void minVolume() {   // Увеличение звука нижней границы
-        Radio cond = new Radio();
-
-        cond.setCurrentVolume(0);
-        cond.increaseVolume();
-
-        int expected = 1;
-        int actual = cond.getCurrentVolume();
-
-        assertEquals(expected, actual);
-
-    }
 
     @Test
-    public void minNegativVolume() {   // уменьшение звука ниже минимального
+    public void reductionMinVolume() {   // уменьшение звука ниже минимального
         Radio cond = new Radio();
+
+        int expectedVolume = 0;
 
         cond.setCurrentVolume(0);
         cond.soundReduction();
 
-        int expected = 0;
-        int actual = cond.getCurrentVolume();
-
-        assertEquals(expected, actual);
+        assertEquals(expectedVolume, expectedVolume);
 
     }
 
     @Test
-    public void NegativVolume() {   // уменьшение отрицательного звука
+    public void reductionVolume() {   // уменьшение звука
         Radio cond = new Radio();
 
-        cond.setCurrentVolume(-1);
+        int expectedVolume = 49;
+
+        cond.setCurrentVolume(50);
         cond.soundReduction();
 
-        int expected = 0;
-        int actual = cond.getCurrentVolume();
-
-        assertEquals(expected, actual);
+        assertEquals(expectedVolume, expectedVolume);
 
     }
-
-    @Test
-    public void middleMinVolume() {   // уменьшение срединного значения звука
-        Radio cond = new Radio();
-
-        cond.setCurrentVolume(5);
-        cond.soundReduction();
-
-        int expected = 4;
-        int actual = cond.getCurrentVolume();
-
-        assertEquals(expected, actual);
-
-    }
-
-    @Test
-    public void maxMinVolume() {   // уменьшение максимального значения звука
-        Radio cond = new Radio();
-
-        cond.setCurrentVolume(10);
-        cond.soundReduction();
-
-        int expected = 9;
-        int actual = cond.getCurrentVolume();
-
-        assertEquals(expected, actual);
-
-    }
-
-    @Test
-    public void minNoVolume() {   // уменьшение максимального значения звука
-        Radio cond = new Radio();
-
-        cond.setCurrentVolume(11);
-        cond.soundReduction();
-
-        int expected = 0;
-        int actual = cond.getCurrentVolume();
-
-        assertEquals(expected, actual);
-
-    }
-
-
 
 }
