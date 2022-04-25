@@ -47,6 +47,16 @@ public class RadioTest {
     }
 
     @Test
+    public void testMiniStation() {  // выставление отрицательного значения (по умолчанию)
+        Radio cond = new Radio();
+
+        int expectedStation = 0;
+        cond.setCurrentStation(-1);
+        assertEquals(expectedStation, cond.getCurrentStation());
+
+    }
+
+    @Test
     public void testMaxModStation() {   // выставление максимальной станции (модифицированное радио)
         int allStation = 25; // колличество станций
         Radio cond = new Radio(allStation);
